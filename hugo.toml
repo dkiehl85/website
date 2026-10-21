@@ -1,0 +1,38 @@
+baseURL = "https://danielkiehl.com/"
+languageCode = "en-us"
+title = "Dan Kiehl"
+enableRobotsTXT = true
+
+[params]
+  tagline = "Export controls, CMMC, and industrial security, explained by someone who runs the programs."
+  description = "Practical writing on ITAR, EAR, 10 CFR 810, CMMC, CUI, and facility clearances."
+  linkedin = "https://www.linkedin.com/in/danielkiehl/"
+  email = "daniel.w.kiehl@gmail.com"
+  # Your Substack name, e.g. "danielkiehl" for danielkiehl.substack.com.
+  # Leave empty to hide the email signup box.
+  substack = "danielkiehl"
+  disclaimer = "Views are my own and not those of my employer. Nothing here is legal advice."
+
+[taxonomies]
+  topic = "topics"
+
+[menus]
+  [[menus.main]]
+    name = "Articles"
+    url = "/articles/"
+    weight = 1
+  [[menus.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 2
+  [[menus.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
