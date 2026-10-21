@@ -4,7 +4,7 @@
   <h1>{{ site.Params.tagline }}</h1>
   <p class="lede">I build and run export control, CMMC, CUI, and facility security programs for a defense engineering firm. This is where I write down what I've learned: the regulations, how they actually play out, and the tools I build to keep up.</p>
   <ul class="topics">
-    <li>ITAR / EAR</li><li>10 CFR 810</li><li>CMMC &amp; CUI</li><li>Industrial security</li><li>Privacy</li>
+    {{ range site.Params.areas }}<li>{{ partial "area-link.html" (dict "name" .name "class" "topic") }}</li>{{ end }}
   </ul>
 </section>
 
