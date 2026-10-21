@@ -116,6 +116,9 @@ a.tag:hover { text-decoration: none; filter: brightness(0.97); }
 .prose h3 { font-family: var(--sans); font-size: 1.05rem; margin: 1.6em 0 0.4em; }
 .prose p, .prose ul, .prose ol { margin: 0 0 1.1em; }
 .prose li { margin-bottom: 0.35em; }
+.prose ul:has(> li > input[type=checkbox]) { list-style: none; padding-left: 0; }
+.prose ul:has(> li > input[type=checkbox]) > li { padding-left: 1.55em; text-indent: -1.55em; }
+.prose li > input[type=checkbox] { width: 1em; height: 1em; margin: 0 0.55em 0 0; vertical-align: -0.12em; accent-color: var(--accent); }
 .prose blockquote { margin: 1.4em 0; padding: 2px 0 2px 18px; border-left: 3px solid var(--accent); color: var(--muted); }
 .prose code { font-family: var(--mono); font-size: 0.88em; background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; }
 .prose pre { background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; }
