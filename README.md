@@ -21,6 +21,8 @@ A personal site built with [Hugo](https://gohugo.io), hosted free on GitHub Page
 
 You can do all of this in the GitHub website: open `content/articles`, choose **Add file → Create new file**, paste, then **Commit**. No local install is needed.
 
+**Topic areas:** `topics` must use names from the `areas` list in `hugo.toml`: Export Controls, CUI & CMMC, FCL & Industrial Security, Infosec, or Privacy. An article can have more than one. Each area gets its own page under `/topics/`, and the Articles page has filter buttons. To rename or add an area, edit that list.
+
 Projects work the same way in `content/projects/`. Use `stack: ["Tool", "Tool"]` in place of `topics`.
 
 `draft: true` keeps a post off the live site.

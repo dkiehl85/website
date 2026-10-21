@@ -13,6 +13,25 @@ enableRobotsTXT = true
   substack = "danielkiehl"
   disclaimer = "Views are my own and not those of my employer. Nothing here is legal advice."
 
+  # Topic areas, in display order. In an article's front matter, use the exact
+  # name, e.g.  topics: ["Export Controls"]  (one or more per article).
+  # To rename or add an area, edit this list. An area's page appears once it has an article.
+  [[params.areas]]
+    name = "Export Controls"
+    description = "ITAR, EAR, and DOE's 10 CFR Part 810: jurisdiction, classification, licensing, and deemed exports."
+  [[params.areas]]
+    name = "CUI & CMMC"
+    description = "Controlled Unclassified Information, NIST SP 800-171, and getting through a CMMC Level 2 assessment."
+  [[params.areas]]
+    name = "FCL & Industrial Security"
+    description = "Facility clearances, NISPOM, and the day-to-day work of an FSO."
+  [[params.areas]]
+    name = "Infosec"
+    description = "Building a security program: frameworks like NIST CSF, risk, and the practical controls behind them."
+  [[params.areas]]
+    name = "Privacy"
+    description = "U.S. state privacy laws, GDPR, and running a privacy program inside a technical firm."
+
 [taxonomies]
   topic = "topics"
 
@@ -22,13 +41,17 @@ enableRobotsTXT = true
     url = "/articles/"
     weight = 1
   [[menus.main]]
+    name = "Topics"
+    url = "/topics/"
+    weight = 2
+  [[menus.main]]
     name = "Projects"
     url = "/projects/"
-    weight = 2
+    weight = 3
   [[menus.main]]
     name = "About"
     url = "/about/"
-    weight = 3
+    weight = 4
 
 [markup.goldmark.renderer]
   unsafe = false
