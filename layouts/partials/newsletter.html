@@ -1,0 +1,10 @@
+{{/* Shows only once `substack` is set in hugo.toml */}}
+{{ with site.Params.substack }}
+<section class="newsletter">
+  <div>
+    <h2>Get new posts by email</h2>
+    <p>Practical notes on export controls, CMMC, and industrial security. No spam. Unsubscribe anytime.</p>
+  </div>
+  <a class="btn" href="https://{{ . }}.substack.com/subscribe" rel="noopener">Subscribe</a>
+</section>
+{{ end }}
