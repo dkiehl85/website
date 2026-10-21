@@ -1,0 +1,25 @@
+{{ define "main" }}
+<article class="post">
+  <header class="post-head">
+    {{ if .IsPage }}{{ if ne .Section "" }}
+    <div class="meta">
+      {{ if eq .Section "articles" }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time> · {{ .ReadingTime }} min read{{ end }}
+      {{ with .Params.stack }}{{ delimit . " · " }}{{ end }}
+    </div>
+    {{ end }}{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    {{ with .Params.topics }}<div class="tags">{{ range . }}<a class="tag" href="{{ (printf "/topics/%s/" (urlize .)) | relURL }}">{{ . }}</a>{{ end }}</div>{{ end }}
+  </header>
+  <div class="prose">
+    {{ .Content }}
+  </div>
+  {{ if eq .Section "articles" }}
+  {{ partial "newsletter.html" . }}
+  <aside class="post-foot">
+    <p>{{ site.Params.disclaimer }}</p>
+    <p>Questions or pushback? <a href="{{ site.Params.linkedin }}">Find me on LinkedIn</a>.</p>
+  </aside>
+  {{ end }}
+</article>
+{{ end }}

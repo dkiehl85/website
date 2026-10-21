@@ -1,0 +1,16 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="intro">{{ . }}</div>{{ end }}
+</header>
+{{ if eq .Section "projects" }}
+  <div class="grid">
+    {{ range .Pages }}{{ partial "project-card.html" . }}{{ end }}
+  </div>
+{{ else }}
+  {{ range .Pages.GroupByDate "2006" }}
+    <h2 class="year">{{ .Key }}</h2>
+    {{ range .Pages }}{{ partial "post-item.html" . }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ end }}
