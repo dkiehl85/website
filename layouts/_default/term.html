@@ -1,0 +1,10 @@
+{{ define "main" }}
+{{ $name := .Title }}
+<header class="page-head">
+  <p class="eyebrow"><a href="{{ "/topics/" | relURL }}">Topics</a></p>
+  <h1>{{ $name }}</h1>
+  {{ range where site.Params.areas "name" $name }}<div class="intro"><p>{{ .description }}</p></div>{{ end }}
+</header>
+{{ partial "area-nav.html" . }}
+{{ range .Pages }}{{ partial "post-item.html" . }}{{ end }}
+{{ end }}

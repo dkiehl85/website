@@ -8,6 +8,7 @@
     {{ range .Pages }}{{ partial "project-card.html" . }}{{ end }}
   </div>
 {{ else }}
+  {{ partial "area-nav.html" . }}
   {{ range .Pages.GroupByDate "2006" }}
     <h2 class="year">{{ .Key }}</h2>
     {{ range .Pages }}{{ partial "post-item.html" . }}{{ end }}

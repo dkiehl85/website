@@ -1,0 +1,23 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>Topics</h1>
+  <div class="intro"><p>Articles grouped by area.</p></div>
+</header>
+<div class="area-list">
+  {{ range site.Params.areas }}
+    {{ $p := partial "area-page.html" .name }}
+    <section class="area-card{{ if not $p }} empty{{ end }}">
+      <div class="area-card-head">
+        <h2>{{ if $p }}<a href="{{ $p.RelPermalink }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</h2>
+        <span class="count">{{ if $p }}{{ len $p.Pages }} {{ cond (eq (len $p.Pages) 1) "article" "articles" }}{{ else }}Coming soon{{ end }}</span>
+      </div>
+      <p>{{ .description }}</p>
+      {{ with $p }}
+      <ul class="area-latest">
+        {{ range first 3 .Pages }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
+      </ul>
+      {{ end }}
+    </section>
+  {{ end }}
+</div>
+{{ end }}

@@ -9,7 +9,7 @@
     {{ end }}{{ end }}
     <h1>{{ .Title }}</h1>
     {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
-    {{ with .Params.topics }}<div class="tags">{{ range . }}<a class="tag" href="{{ (printf "/topics/%s/" (urlize .)) | relURL }}">{{ . }}</a>{{ end }}</div>{{ end }}
+    {{ with .Params.topics }}<div class="tags">{{ range . }}{{ partial "area-link.html" (dict "name" . "class" "tag") }}{{ end }}</div>{{ end }}
   </header>
   <div class="prose">
     {{ .Content }}
