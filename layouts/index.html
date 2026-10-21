@@ -1,0 +1,34 @@
+{{ define "main" }}
+<section class="hero">
+  <p class="eyebrow">Compliance counsel · Atlanta</p>
+  <h1>{{ site.Params.tagline }}</h1>
+  <p class="lede">I build and run export control, CMMC, CUI, and facility security programs for a defense engineering firm. This is where I write down what I've learned: the regulations, how they actually play out, and the tools I build to keep up.</p>
+  <ul class="topics">
+    <li>ITAR / EAR</li><li>10 CFR 810</li><li>CMMC &amp; CUI</li><li>Industrial security</li><li>Privacy</li>
+  </ul>
+</section>
+
+{{ with first 5 (where site.RegularPages "Section" "articles") }}
+<section class="block">
+  <div class="block-head">
+    <h2>Recent articles</h2>
+    <a href="{{ "/articles/" | relURL }}">All articles →</a>
+  </div>
+  {{ range . }}{{ partial "post-item.html" . }}{{ end }}
+</section>
+{{ end }}
+
+{{ partial "newsletter.html" . }}
+
+{{ with first 4 (where site.RegularPages "Section" "projects") }}
+<section class="block">
+  <div class="block-head">
+    <h2>Projects</h2>
+    <a href="{{ "/projects/" | relURL }}">All projects →</a>
+  </div>
+  <div class="grid">
+    {{ range . }}{{ partial "project-card.html" . }}{{ end }}
+  </div>
+</section>
+{{ end }}
+{{ end }}
