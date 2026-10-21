@@ -12,9 +12,9 @@ The OFAC release is the one I'd send to anyone outside banking. Nearly every vio
 
 ## The short version
 
-Screening tools rarely fail loudly. At Bank of America, the failures were a priority setting, two late watchlist updates, a rule meant to cut false positives, and analysts who cleared real hits. None of them would have shown up on a dashboard as an outage, and together they let $14.8 million move to or through blocked parties.
+At Bank of America, the failures were a priority setting, two late watchlist updates, a rule meant to cut false positives, and analysts who cleared real hits. None of them would have shown up on a dashboard as an outage, and together they let $14.8 million move to or through blocked parties.
 
-OFAC's position is blunt: Each organization remains responsible for its own compliance regardless of whether it relies upon third-party providers. If software performs a regulatory duty for you, confirming that it's running isn't enough. You have to test what it actually does.
+OFAC's release says it directly: Each organization remains responsible for its own compliance regardless of whether it relies upon third-party providers. If software performs a regulatory duty for you, confirming that it's running isn't enough. You have to test what it actually does.
 
 ## What went wrong at Bank of America
 
@@ -22,7 +22,7 @@ The enforcement release describes four problems.
 
 ### Exact matches went to the low-priority queue
 
-A design flaw in the alert prioritization logic sent alerts on customers whose name *and* date of birth exactly matched a blocked person to the low- or medium-priority queue. Those are the strongest hits a screening system can produce, and they waited. Three designated individuals completed 31 transactions ($56,258) between September 2021 and February 2024. The fix landed six months after the bank first identified the issue.
+A design flaw in the alert prioritization logic sent alerts on customers whose name *and* date of birth exactly matched a blocked person to the low- or medium-priority queue, so review of those alerts was delayed for an extended period. Three designated individuals completed 31 transactions ($56,258) between September 2021 and February 2024. The fix landed six months after the bank first identified the issue.
 
 ### The watchlist was out of date twice
 
@@ -36,7 +36,7 @@ Between February 2022 and March 2025, the bank processed 403 transactions ($14,3
 
 ### A rule turned old decisions into standing exemptions
 
-The bank had an "alert suppression rule." If a new alert matched the criteria of one that an analyst had already cleared as a false positive, the payment could be released without anyone looking at it. One person's judgment call on one day quietly became policy.
+The bank had an "alert suppression rule." If a new alert matched the criteria of one that an analyst had already cleared as a false positive, the payment could be released without anyone looking at it.
 
 OFAC found the conduct reckless, noted it had already sent the bank multiple cautionary letters about similar conduct, and gave no reduction from the base penalty.
 
@@ -44,15 +44,17 @@ OFAC found the conduct reckless, noted it had already sent the bank multiple cau
 
 Each of these has an export-control equivalent.
 
-**"Running" gets mistaken for "working."** Screening dashboards report volumes and clearance times. They almost never show whether a name you know is listed would actually alert. If you've never fed your tool a known bad name, you don't know that it catches one.
+The most common one is treating a tool that's running as a tool that's working. Screening dashboards report volumes and clearance times. They almost never show whether a name you know is listed would actually alert, and unless you've fed your tool a known listed name, you have no evidence it catches one.
 
-**The vendor's list is assumed to be current.** OFAC's 2019 *Framework for OFAC Compliance Commitments* already listed "sanctions screening software or filter faults" as a recurring root cause, including tools that weren't updated with SDN changes. Entity List additions are published in the Federal Register and often take effect right away. Ask your vendor how fast updates load, get the answer in writing, and check it yourself the day after a designation.
+I've seen the same problem outside sanctions. A compliance tracking system for a CUI program was supposed to record the date each person completed a requirement, and it wasn't recording them, because the field it used to match people by email address was misconfigured. We found it only through testing and review.
 
-**Rules get tuned for the reviewer's workload.** False positives are the universal complaint about screening tools, so rules get added to cut them: raise the match threshold, suppress repeat alerts, and auto-clear names that were cleared before. Each one trades risk for convenience. Any rule that clears an alert without a person looking at it is a compliance decision, and it should be approved and documented like one.
+Vendor lists get assumed to be current. OFAC's 2019 *Framework for OFAC Compliance Commitments* already listed "sanctions screening software or filter faults" as a recurring root cause, including tools that weren't updated with SDN changes. Entity List additions are published in the Federal Register and often take effect right away. Ask your vendor how fast updates load, get the answer in writing, and check it yourself the day after a designation.
 
-**Volume trains people to click "clear."** When nearly every alert is a false positive, reviewers learn to dismiss them. An analyst who has cleared 400 hits on a common surname will clear the 401st, even when it's real.
+Rules also get tuned for the reviewer's workload. False positives are the universal complaint about screening tools, so rules get added to cut them: raise the match threshold, suppress repeat alerts, auto-clear names that were cleared before. Any rule that clears an alert without a person looking at it is a compliance decision, and it should be approved and documented like one.
 
-**The first lookback is too narrow.** Bank of America's initial review missed the full scope, which only came out after OFAC issued an administrative subpoena in January 2025. When you find a gap, assume it's wider than your first query shows.
+Volume makes it worse. When nearly every alert is a false positive, reviewers learn to dismiss them. An analyst who has cleared 400 hits on a common surname will clear the 401st, even when it's real.
+
+Lookbacks tend to start too narrow, too. Bank of America's initial review missed the full scope, which only came out after OFAC issued an administrative subpoena in January 2025. Scope yours wider than the first query suggests, and write down how you scoped it.
 
 ## Borrow a standard that already exists
 
@@ -60,47 +62,19 @@ The most specific rule I know of comes from New York's Department of Financial S
 
 OFAC's Framework puts it more briefly: select and calibrate technology for your risk profile, and routinely test it to ensure it works.
 
-Part 504 only binds DFS-regulated institutions. You don't need to be one to use it as a test plan.
+Part 504 only binds DFS-regulated institutions, but its testing requirements work as a test plan for anyone.
 
 ## Checklist: testing software that does a compliance job
 
 This works for restricted party screening, sanctions filters, and any automated rule that makes or skips a regulatory decision.
 
-**Before you rely on it**
-
-- [ ] Write down the regulatory duty the tool performs and the person who owns the result. "The vendor" is not an answer; it must be someone within your organization.
-- [ ] Map every data source that should feed it (customer master, vendor master, shipping, payments) and confirm each one arrives complete.
-- [ ] List the restricted lists it screens against (SDN, Entity List, Denied Persons, Unverified, Military End-User, and so on) and note any it doesn't.
-- [ ] Document the match logic and threshold, and why that threshold fits your risk.
-- [ ] Test with known positives: real listed names plus variations (transliterations, reordered names, missing middle names, alternate spellings like "Habana" for "Havana").
-
-**List updates**
-
-- [ ] Get the vendor's update commitment in hours, in writing.
-- [ ] After a new designation, screen a newly listed name the next business day to confirm the update has loaded.
-- [ ] Have a fallback for outages, such as a manual check against the government's own list.
-
-**Alert handling**
-
-- [ ] Exact and near-exact matches go to the top of the queue.
-- [ ] Inventory every rule that suppresses, auto-clears, or downgrades an alert. Each needs a named approver, a written reason, and a review date.
-- [ ] A false-positive decision expires. It shouldn't clear future alerts indefinitely, and it gets rechecked when the lists change.
-- [ ] A second person reviews a sample of cleared alerts on a set schedule.
-
-**Changes**
-
-- [ ] Changes to logic, thresholds, data feeds, or vendors go through change control, with testing before and after.
-- [ ] Roll changes out in stages so you don't create a backlog. OFAC's release calls for exactly this.
-
-**When something breaks**
-
-- [ ] Put a compensating control, usually manual review, in place immediately.
-- [ ] Run a lookback wider than you think you need, and document how you scoped it.
-- [ ] Decide quickly, with counsel, whether to voluntarily self-disclose. In this case, OFAC counted the 62 violations Bank of America self-disclosed at half their transaction value when setting the base penalty, and the other 413 at the full schedule amount.
-
-**Once a year**
-
-- [ ] Someone independent of the people who configured the tool tests the whole chain end-to-end.
-- [ ] The results, including what you found and fixed, should be reported to management in writing.
-
-
+- [ ] Name the person in your organization who owns the tool's results. "The vendor" is not an answer.
+- [ ] Confirm what goes in: every data source that should feed the tool, and every restricted list it should screen against.
+- [ ] Test it with known listed names and variations (transliterations, reordered names, alternate spellings like "Habana" for "Havana").
+- [ ] Get the vendor's list-update commitment in writing, and screen a newly designated name the next business day to confirm it loaded.
+- [ ] Make sure exact and near-exact matches go to the top of the queue.
+- [ ] Inventory every rule that suppresses, auto-clears, or downgrades an alert. Each one needs a named approver and a review date.
+- [ ] Have a second person review a sample of cleared alerts on a set schedule.
+- [ ] Run changes to logic, thresholds, data feeds, or vendors through change control, with testing before and after.
+- [ ] When something breaks, switch to manual review, run a lookback wider than you think you need, and decide quickly, with counsel, whether to self-disclose.
+- [ ] Once a year, have someone independent of the people who configured the tool test the whole chain and report the results to management.
