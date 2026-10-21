@@ -1,0 +1,4 @@
+{{/* Given an area/topic name, returns a link to its page if it has articles, else plain text.
+     Usage: {{ partial "area-link.html" (dict "name" "Export Controls" "class" "tag") }} */}}
+{{ $p := partial "area-page.html" .name }}
+{{ if $p }}<a class="{{ .class }}" href="{{ $p.RelPermalink }}">{{ .name }}{{ with .count }} <span class="count">{{ len $p.Pages }}</span>{{ end }}</a>{{ else }}<span class="{{ .class }} empty">{{ .name }}</span>{{ end }}

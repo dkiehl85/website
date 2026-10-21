@@ -1,0 +1,6 @@
+{{/* Returns the topic page for an area name (case-insensitive), or false if it has no articles yet. */}}
+{{ $found := false }}
+{{ range site.Taxonomies.topics }}
+  {{ if eq (lower .Page.Title) (lower $) }}{{ $found = .Page }}{{ end }}
+{{ end }}
+{{ return $found }}

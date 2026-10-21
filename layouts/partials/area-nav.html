@@ -1,0 +1,9 @@
+{{/* Row of topic-area pills. Pass the current page so its area is highlighted. */}}
+<nav class="area-nav" aria-label="Browse by topic">
+  <a class="pill{{ if eq .Kind "section" }} on{{ end }}" href="{{ "/articles/" | relURL }}">All</a>
+  {{ $cur := .Title }}
+  {{ range site.Params.areas }}
+    {{ $p := partial "area-page.html" .name }}
+    {{ if $p }}<a class="pill{{ if eq $cur .name }} on{{ end }}" href="{{ $p.RelPermalink }}">{{ .name }} <span class="count">{{ len $p.Pages }}</span></a>{{ end }}
+  {{ end }}
+</nav>
