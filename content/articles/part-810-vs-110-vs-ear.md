@@ -3,7 +3,7 @@ title: "Part 810, Part 110, or the EAR? Sorting out nuclear export jurisdiction"
 date: 2026-10-20
 draft: true
 description: "Three regimes, three agencies, one question: what exactly are you sending abroad? A practical way to figure out which rules apply."
-topics: ["Export Controls", "10 CFR 810"]
+topics: ["Export Controls"]
 ---
 
 > **SAMPLE ARTICLE: review, edit, and verify before publishing.** Set `draft: false` when it's ready.

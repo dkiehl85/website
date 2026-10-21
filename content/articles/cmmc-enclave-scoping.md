@@ -3,7 +3,7 @@ title: "Scoping CMMC Level 2 with an enclave: what actually shrinks"
 date: 2026-10-08
 draft: true
 description: "An enclave can cut your assessment scope dramatically, but not everything leaves scope. Here's what stays in."
-topics: ["CMMC & CUI"]
+topics: ["CUI & CMMC"]
 ---
 
 > **SAMPLE ARTICLE: review, edit, and verify before publishing.** Set `draft: false` when it's ready.

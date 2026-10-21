@@ -3,7 +3,7 @@ title: "Why I'm writing this down"
 date: 2026-09-28
 draft: true
 description: "Defense compliance is mostly learned by doing, quietly, one program at a time. I'd like to change that a little."
-topics: ["Meta"]
+topics: []
 ---
 
 > **SAMPLE ARTICLE: rewrite in your own voice before publishing.** Set `draft: false` when it's ready.
